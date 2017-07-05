@@ -2,7 +2,7 @@ import React from 'react'
 
 const Note = (props) => {
   return (
-    <a href="/notes/note-1497983165049" className="active">
+    <a>
       <li>
         <div className="note">
           <div className="note-title">
