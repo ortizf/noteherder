@@ -9,7 +9,10 @@ const Sidebar = () => {
   return (
     <nav className="Sidebar">
       <div className="logo">
-        <img src={quill} alt="Noteherder" />
+        <img
+          src={quill}
+          alt="Noteherder"
+        />
       </div>
       <a className="new-note" href="/notes">
         <img
