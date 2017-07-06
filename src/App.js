@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import base from './base'
 
 import './App.css'
 import Main from './Main'
@@ -9,19 +8,9 @@ class App extends Component {
     super()
 
     this.state = {
-      notes: {},
+      notes:  {},
       currentNote: this.blankNote(),
     }
-  }
-
-  componentDidMount = () => {
-    base.syncState(
-      'notes',
-      {
-        context: this,  // what object the state is on
-        state: 'notes', // which property to sync
-      }
-    )
   }
 
   blankNote = () => {
@@ -53,7 +42,7 @@ class App extends Component {
 
   removeCurrentNote = () => {
     const notes = {...this.state.notes}
-    notes[this.state.currentNote.id] = null
+    delete notes[this.state.currentNote.id]
 
     this.setState({ notes })
     this.resetCurrentNote()
@@ -67,19 +56,15 @@ class App extends Component {
       removeCurrentNote: this.removeCurrentNote,
     }
 
-    const noteData = {
-      notes: this.state.notes,
-      currentNote: this.state.currentNote,
-    }
-
     return (
       <div className="App">
         <Main
+          notes={this.state.notes}
+          currentNote={this.state.currentNote}
           {...actions}
-          {...noteData}
         />
       </div>
-    );
+    )
   }
 }
 
