@@ -14,6 +14,16 @@ class App extends Component {
     }
   }
 
+  componentDidMount = () => {
+    base.syncState(
+      'notes',
+      {
+        context: this,
+        state: 'notes',
+      }
+    )
+  }
+
   blankNote = () => {
     return {
       id: null,
