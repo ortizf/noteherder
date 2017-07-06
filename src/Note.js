@@ -1,25 +1,28 @@
 import React from 'react'
 
-const Note = (props) => {
-    const handleClick = () => {
-        console.log('clicky clicky')
-    }
+const Note = ({ note, setCurrentNote }) => {
+  const handleClick = () => {
+    setCurrentNote(note)
+  }
 
-    return (
-        <a onClick={handleClick}>
-        <li>
-            <div className="note">
-            <div className="note-title">
-                {props.note.title}
-            </div>
-            <div className="note-body">
-                <p>
-                {props.note.body}
-                </p>
-            </div>
-            </div>
-        </li>
-        </a>
+  return (
+    <a
+      className="active"
+      onClick={handleClick}
+    >
+      <li>
+        <div className="note">
+          <div className="note-title">
+            {note.title}
+          </div>
+          <div className="note-body">
+            <p>
+              {note.body}
+            </p>
+          </div>
+        </div>
+      </li>
+    </a>
   )
 }
 
