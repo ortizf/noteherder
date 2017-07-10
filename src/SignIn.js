@@ -5,9 +5,7 @@ import { auth, googleProvider } from './base'
 
 const SignIn = ({ handleAuth }) => {
   const authenticate = () => {
-    auth
-      .signInWithPopup(googleProvider)
-      .then(handleAuth)
+    auth.signInWithPopup(googleProvider)
   }
 
   return (
