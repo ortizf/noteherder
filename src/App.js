@@ -11,21 +11,20 @@ class App extends Component {
 
     this.state = {
       notes:  {},
-      currentNote: this.blankNote(),
+      currentNoteId: null,
       uid: null,
     }
   }
 
   componentWillMount = () => {
     this.getUserFromLocalStorage()
-
     auth.onAuthStateChanged(
       (user) => {
         if (user) {
-          //signed in
+          // signed in
           this.handleAuth(user)
         } else {
-          //signed out
+          // signed out
           this.handleUnauth()
         }
       }
@@ -48,20 +47,12 @@ class App extends Component {
     )
   }
 
-  blankNote = () => {
-    return {
-      id: null,
-      title: '',
-      body: '',
-    }
-  }
-
   setCurrentNote = (note) => {
-    this.setState({ currentNote: note })
+    this.setState({ currentNoteId: note.id })
   }
 
   resetCurrentNote = () => {
-    this.setCurrentNote(this.blankNote())
+    this.setCurrentNote({ id: null })
   }
 
   saveNote = (note) => {
@@ -77,7 +68,7 @@ class App extends Component {
 
   removeCurrentNote = () => {
     const notes = {...this.state.notes}
-    notes[this.state.currentNote.id] = null
+    notes[this.state.currentNoteId] = null
 
     this.setState({ notes })
     this.resetCurrentNote()
@@ -89,7 +80,6 @@ class App extends Component {
 
   handleAuth = (user) => {
     localStorage.setItem('uid', user.uid)
-
     this.setState(
       { uid: user.uid },
       this.syncNotes
@@ -98,12 +88,12 @@ class App extends Component {
 
   handleUnauth = () => {
     localStorage.removeItem('uid')
-    
+
     if (this.bindingRef) {
       base.removeBinding(this.bindingRef)
-    } 
+    }
 
-    this.setState({ 
+    this.setState({
       uid: null,
       notes: {},
     })
@@ -126,7 +116,7 @@ class App extends Component {
 
     const noteData = {
       notes: this.state.notes,
-      currentNote: this.state.currentNote,
+      currentNoteId: this.state.currentNoteId,
     }
 
     return (
