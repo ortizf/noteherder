@@ -7,12 +7,8 @@ import githubLogo from './githubLogo.svg'
 import { auth, googleProvider, githubProvider } from './base'
 
 const SignIn = () => {
-  const authenticateGoogle = () => {
-    auth.signInWithPopup(googleProvider)
-  }
-
-  const authenticateGithub = () => {
-    auth.signInWithPopup(githubProvider)
+  const authenticate = (provider) => {
+    auth.signInWithPopup(provider)
   }
 
   return (
@@ -26,14 +22,14 @@ const SignIn = () => {
         <p>You never know when you'll need to write crap down. In fact, you should probably be taking notes right now.</p>
         <button
           className="github"
-          onClick={authenticateGithub}
+          onClick={() => authenticate(githubProvider)}
         >
           <img src={githubLogo} alt="" />
           Sign in with Github
         </button>
         <button
           className="google"
-          onClick={authenticateGoogle}
+          onClick={() => authenticate(googleProvider)}
         >
           <img src={googleLogo} alt="" />
           Sign in with Google
