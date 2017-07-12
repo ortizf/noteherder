@@ -57,14 +57,20 @@ class App extends Component {
   }
 
   saveNote = (note) => {
-    const notes = {...this.state.notes}
+    let shouldRedirect = false
     if (!note.id) {
       note.id = Date.now()
+      shouldRedirect = true
     }
+
+    const notes = {...this.state.notes}
     notes[note.id] = note
 
     this.setState({ notes })
-    this.setCurrentNote(note)
+
+    if (shouldRedirect) {
+      this.props.history.push(`/notes/${note.id}`)
+    }
   }
 
   removeCurrentNote = () => {
@@ -121,7 +127,7 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route 
+          <Route
             path="/sign-in"
             render={() => (
               this.signedIn()
@@ -129,21 +135,21 @@ class App extends Component {
                 : <SignIn />
             )}
           />
-          <Route 
-            path="/notes" 
+          <Route
+            path="/notes"
             render={() => (
               this.signedIn()
-                ? <Main 
-                  {...actions}
-                  {...noteData}
-                />
+                ? <Main
+                    {...actions}
+                    {...noteData}
+                  />
                 : <Redirect to="/sign-in" />
-            )} 
+            )}
           />
           <Route render={() => (
             this.signedIn()
-              ? <Redirect to ="/notes" />
-              : <Redirect to ="/sign-in" />
+              ? <Redirect to="/notes" />
+              : <Redirect to="/sign-in" />
           )} />
         </Switch>
       </div>
