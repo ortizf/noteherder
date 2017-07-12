@@ -47,8 +47,8 @@
   margin-top: 0;
 }
 .SignIn button.github {
-  background-color: white;
-  color: #666;
+  background-color: #444;
+  color: white;
 }
 .SignIn button.github i.fa {
   font-size: 3rem;
