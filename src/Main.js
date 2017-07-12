@@ -11,13 +11,13 @@ const Main = (props) => {
     notes: props.notes,
     currentNoteId: props.currentNoteId,
     saveNote: props.saveNote,
-    removeCurrentNote: props.removeCurrentNote,
+    removeNote: props.removeNote,
   }
 
   return (
     <div className="Main">
-      <Sidebar signOut={props.signOut}/>
-      <NoteList notes={props.notes}/>
+      <Sidebar signOut={props.signOut} />
+      <NoteList notes={props.notes} />
 
       <Switch>
         <Route
