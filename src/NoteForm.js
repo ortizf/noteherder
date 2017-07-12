@@ -80,6 +80,7 @@ class NoteForm extends Component {
           
           <RichTextEditor
             name="body"
+            placeholder="Start typing your note"
             value={this.state.editorValue}
             onChange={this.handleEditorChanges}
           ></RichTextEditor>
